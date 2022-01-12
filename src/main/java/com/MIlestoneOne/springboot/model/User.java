@@ -62,6 +62,7 @@ public class User {
         address2=newaddress2;
     }
 
+//    public long getUSerID(){return  id;}
     public String getUserName()
     {
         return userName;

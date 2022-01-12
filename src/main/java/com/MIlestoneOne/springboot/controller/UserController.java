@@ -8,9 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.List;
 
-@RestController   // by using this our class is capable of handling http request
+@RestController   //by this annotation we are declaring here that this class is a controller ,by using our class is capable of handling http request
 @RequestMapping("/user")
 
 // all the rest api operation we do , we define in this class.
@@ -28,9 +29,18 @@ public class UserController {
 
     //POST method or Create Method
     @PostMapping
-    public User createUser (@RequestBody User user)//@RequestBody will automatically convert JSON object to Java object
+    public String createUser (@RequestBody User user1)//@RequestBody will automatically convert JSON object to Java object
     {
-        return userRepository.save(user);
+        List<User>list = userRepository.findAll();
+        //validation for duplicate entries
+            for(User user:list)
+            {
+                if(user.getUserName().equals(user1.getUserName())
+                        ||user.getEmailID().equals(user1.getEmailID())||user.getMobileNumber()== user1.getMobileNumber())
+                    return "User already exist";
+            }
+            userRepository.save(user1);
+            return "User Saved";
     }
 
     //GET method for a specific ID or Read Method
