@@ -2,14 +2,15 @@ package com.MIlestoneOne.springboot.controller;
 
 import com.MIlestoneOne.springboot.exception.ResourcNotFoundException;
 import com.MIlestoneOne.springboot.model.User;
+import com.MIlestoneOne.springboot.repository.ServiceLayer;
 import com.MIlestoneOne.springboot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @RestController   //by this annotation we are declaring here that this class is a controller ,by using our class is capable of handling http request
 @RequestMapping("/user")
@@ -19,6 +20,9 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ServiceLayer serviceLayer;
 
     //get method or read method for reading all the data from the database
     @GetMapping
@@ -45,11 +49,15 @@ public class UserController {
 
     //GET method for a specific ID or Read Method
     @GetMapping("{id}")
-    public ResponseEntity<User> getUserById(@PathVariable long id)
+    public User getUserById(@PathVariable long id)
     {
-        User user= userRepository.findById(id)
-                .orElseThrow(()-> new ResourcNotFoundException("User not founded with id:"+id));
-        return ResponseEntity.ok(user);
+     // by adding service layer in the project;
+        //controller <-> service layer <-> user repository <-> database;
+        return serviceLayer.getBYIDbro(id);
+// ResponseEntity<User>
+//        User user= userRepository.findById(id)
+//                .orElseThrow(()-> new ResourcNotFoundException("User not founded with id:"+id));
+//        return ResponseEntity.ok(user);
     }
 
     //PUT method (update a specific ID) or Update Method
