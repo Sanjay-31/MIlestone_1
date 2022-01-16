@@ -1,12 +1,8 @@
 package com.MIlestoneOne.springboot.controller;
 
-import com.MIlestoneOne.springboot.exception.ResourcNotFoundException;
 import com.MIlestoneOne.springboot.model.User;
 import com.MIlestoneOne.springboot.repository.ServiceLayer;
-import com.MIlestoneOne.springboot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,73 +15,74 @@ import java.util.Optional;
 public class UserController {
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     private ServiceLayer serviceLayer;
 
     //get method or read method for reading all the data from the database
     @GetMapping
     public List<User> getALlUser()
     {
-        return userRepository.findAll();
-    }
-
-    //POST method or Create Method
-    @PostMapping
-    public String createUser (@RequestBody User user1)//@RequestBody will automatically convert JSON object to Java object
-    {
-        List<User>list = userRepository.findAll();
-        //validation for duplicate entries
-            for(User user:list)
-            {
-                if(user.getUserName().equals(user1.getUserName())
-                        ||user.getEmailID().equals(user1.getEmailID())||user.getMobileNumber()== user1.getMobileNumber())
-                    return "User already exist";
-            }
-            userRepository.save(user1);
-            return "User Saved";
+        return serviceLayer.findAllUsers();
     }
 
     //GET method for a specific ID or Read Method
     @GetMapping("{id}")
-    public User getUserById(@PathVariable long id)
+    public String getUserById(@PathVariable long id)
     {
-     // by adding service layer in the project;
-        //controller <-> service layer <-> user repository <-> database;
-        return serviceLayer.getBYIDbro(id);
-// ResponseEntity<User>
-//        User user= userRepository.findById(id)
-//                .orElseThrow(()-> new ResourcNotFoundException("User not founded with id:"+id));
-//        return ResponseEntity.ok(user);
+        if(serviceLayer.checkForTheUser(id))
+        {
+          return serviceLayer.getById(id);
+        }
+        else
+        {
+            return "User not exist";
+        }
     }
+
+
+    //POST method or Create Method
+    @PostMapping
+    public String createUser (@RequestBody User newUser)//@RequestBody will automatically convert JSON object to Java object
+    {
+        if(serviceLayer.checkforExistingUser(newUser))
+        {
+           return "User Already Exist";
+        }
+        else
+        {
+            serviceLayer.saveUser(newUser);
+            return "User Saved";
+        }
+    }
+
+
 
     //PUT method (update a specific ID) or Update Method
     @PutMapping("{id}")
-    public ResponseEntity<User> updateUser(@PathVariable long id,@RequestBody User userdetails)
+    public String updateUser(@PathVariable long id,@RequestBody User UpdatedUser)
     {
-        User updateuser=userRepository.findById(id)
-                .orElseThrow(()->new ResourcNotFoundException("User not founded with the id: "+id));
-
-        updateuser.setUserName(userdetails.getUserName());
-        updateuser.setFirstName(userdetails.getFirstName());
-        updateuser.setLastName(userdetails.getLastName());
-        updateuser.setMobileNumber(userdetails.getMobileNumber());  // how to typecast from int to long
-        updateuser.setEmailID(userdetails.getEmailID());
-        updateuser.setAddress1(userdetails.getAddress1());
-        updateuser.setAddress2(userdetails.getAddress2());
-
-        userRepository.save(updateuser);
-        return ResponseEntity.ok(updateuser);
+        if(serviceLayer.checkForTheUser(id))
+        {
+            serviceLayer.UpdateUser(id,UpdatedUser);
+            return "User Updated";
+        }
+        else
+        {
+            return "User not exist";
+        }
     }
 
     //Delete Method for a specific id
     @DeleteMapping("{id}")
-    public ResponseEntity<HttpStatus> deleteEmployee(@PathVariable long id)
+    public String deleteEmployee(@PathVariable long id)
     {
-        User deleteduser=userRepository.findById(id)
-                .orElseThrow(()->new ResourcNotFoundException("User does not exit"));
-        userRepository.delete(deleteduser);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        if(serviceLayer.checkForTheUser(id))
+        {
+            serviceLayer.deleteUser(id);
+            return "User Deleted";
+        }
+        else
+        {
+            return "User not exist";
+        }
     }
 }
