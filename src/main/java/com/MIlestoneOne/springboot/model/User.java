@@ -91,6 +91,10 @@ public class User {
     {
         return address2;
     }
+    public long getId()
+    {
+        return id;
+    }
 
 
 
