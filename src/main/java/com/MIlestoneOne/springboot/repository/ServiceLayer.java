@@ -23,20 +23,12 @@ public class ServiceLayer {
     public User getById(long id)
     {
         return userRepository.findById(id).get();
-//        return u.getFirstName() + "\n" +u.getLastName()+"\n"+u.getMobileNumber()+"\n"+u.getEmailID();
     }
 
     public boolean checkForTheUser(long id)
     {
 
         return userRepository.existsById(id);
-//        List<User> users=userRepository.findAll();
-//        for(User u:users)
-//        {
-//            if(u.getId()==id)
-//                return  true;
-//        }
-//        return  false;
     }
 
     public boolean checkforExistingUser(User newUser) {

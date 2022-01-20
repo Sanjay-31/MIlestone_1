@@ -9,28 +9,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class StatusUser {
-//    private Object ResponseEntity;
 
-//    public static ResponseEntity<Object> StatusResponse(String message, HttpStatus status, Object responseObj) {
-//        Map<String, Object> map = new HashMap<String, Object>();
-//        map.put("message", message);
-//        map.put("status", status.value());
-//        map.put("data", responseObj);
-////        StatusUser ss=new StatusUser();
-////        ss.firstNameOfUser=first;
-////        ss.lastNameOfUser=last;
-////        ss.Status=status;
-////        return ss;
-//
-//        return new ResponseEntity<Object>(map,status);
-//    }
-
-//
-     public static ResponseEntity<Object> StatusResponse(String message, ResponseClass newUU)
+     public  ResponseEntity<Object> GetStatusResponse(String message, ResponseClass newUser)
     {
         Map<String,Object>map= new HashMap<String,Object>();
         map.put("status",message);
-        map.put("Data",newUU);
+        map.put("Data",newUser);
+        return  new  ResponseEntity<Object>(map,HttpStatus.OK);
+    }
+
+    public ResponseEntity<Object> PostStatusResponse(String message, User newUser) {
+        Map<String,Object>map= new HashMap<String,Object>();
+        map.put("status",message);
+        map.put("Data",newUser);
         return  new  ResponseEntity<Object>(map,HttpStatus.OK);
     }
 }

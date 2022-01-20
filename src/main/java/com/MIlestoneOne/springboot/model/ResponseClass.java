@@ -1,5 +1,7 @@
 package com.MIlestoneOne.springboot.model;
 
+
+// response class for returning only returning some attributes.
 public class ResponseClass {
     private String First;
     private String Last;

@@ -40,33 +40,26 @@ public class UserController {
               {
                   User u= serviceLayer.getById(id);
                   ResponseClass r=new ResponseClass(u);
-                  return statusUser.StatusResponse("Retrieving Data Successfull",r);
+                  return statusUser.GetStatusResponse("Retrieving Data Successfull",r);
               }
               else
               {
-                  return statusUser.StatusResponse("User Not Exists",null);
+                  return statusUser.GetStatusResponse("User Not Exists",null);
               }
     }
-//status error
-
     //POST method or Create Method
     @PostMapping
-    public String createUser (@RequestBody User newUser)//@RequestBody will automatically convert JSON object to Java object
+    public ResponseEntity<Object> createUser (@RequestBody User newUser)//@RequestBody will automatically convert JSON object to Java object
     {
-
-        serviceLayer.saveUser(newUser);
-        return "Saveddd";
-////        StatusUser statusUser=new StatusUser();
-//
-//        if(serviceLayer.checkforExistingUser(newUser))
-//        {
-//            return statusUser.StatusResponse("User Already exist", HttpStatus.OK, newUser);
-//        }
-//        else
-//        {
-//            serviceLayer.saveUser(newUser);
-//            return StatusUser.StatusResponse("User saved", HttpStatus.MULTI_STATUS, newUser);
-//        }
+        if(serviceLayer.checkforExistingUser(newUser))
+        {
+            return statusUser.PostStatusResponse("A User Already exist with same credentials", newUser);
+        }
+        else
+        {
+            serviceLayer.saveUser(newUser);
+            return statusUser.PostStatusResponse("User saved", newUser);
+        }
     }
 
 
