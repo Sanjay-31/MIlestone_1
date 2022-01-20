@@ -1,5 +1,6 @@
 package com.MIlestoneOne.springboot.controller;
 
+import com.MIlestoneOne.springboot.model.ResponseClass;
 import com.MIlestoneOne.springboot.model.StatusUser;
 import com.MIlestoneOne.springboot.model.User;
 import com.MIlestoneOne.springboot.repository.ServiceLayer;
@@ -33,39 +34,18 @@ public class UserController {
 
     //GET method for a specific ID or Read Method
     @GetMapping("{id}")
-    public Map<String,Object> getUserById(@PathVariable long id)
+    public ResponseEntity<Object> getUserById(@PathVariable long id)
     {
-
               if(serviceLayer.checkForTheUser(id))
               {
                   User u= serviceLayer.getById(id);
-
-                  return statusUser.StatusResponse("Retrieving Data Successfull",u);
+                  ResponseClass r=new ResponseClass(u);
+                  return statusUser.StatusResponse("Retrieving Data Successfull",r);
               }
               else
               {
                   return statusUser.StatusResponse("User Not Exists",null);
               }
-
-//        Map<String,Object>map= new HashMap<String,Object>();
-//        map.put("status","Successss");
-//        map.put("Data",u);
-//        map.put("Http Status",HttpStatus.OK.value());
-//        return map;
-//           StatusUser statusUser=new StatusUser();
-//        if(serviceLayer.checkForTheUser(id))
-//        {
-//            User u= serviceLayer.getById(id);
-//        return statusUser.StatusResponse("Retrieval succesfull",HttpStatus.OK,u);
-//
-////          return statusUser.StatusResponse("Successssss",u);
-////          return statusUser.StatusResponse("User is successfully retieved",HttpStatus.OK,u);
-//        }
-//        else
-//        {
-//            return statusUser.StatusResponse("User Not Found",HttpStatus.MULTI_STATUS,null);
-////           return statusUser.StatusResponse("noooooot exist",null);
-//        }
     }
 //status error
 

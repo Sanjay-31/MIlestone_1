@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class StatusUser {
+//    private Object ResponseEntity;
 
 //    public static ResponseEntity<Object> StatusResponse(String message, HttpStatus status, Object responseObj) {
 //        Map<String, Object> map = new HashMap<String, Object>();
@@ -25,11 +26,11 @@ public class StatusUser {
 //    }
 
 //
-    public Map<String,Object> StatusResponse(String message, User newUU)
+     public static ResponseEntity<Object> StatusResponse(String message, ResponseClass newUU)
     {
         Map<String,Object>map= new HashMap<String,Object>();
         map.put("status",message);
         map.put("Data",newUU);
-        return map;
+        return  new  ResponseEntity<Object>(map,HttpStatus.OK);
     }
 }
