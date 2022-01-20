@@ -20,10 +20,10 @@ public class ServiceLayer {
         return userRepository.findAll();
     }
 
-    public String getById(long id)
+    public User getById(long id)
     {
-        User u= userRepository.getById(id);
-        return u.getFirstName() + "\n" +u.getLastName()+"\n"+u.getMobileNumber()+"\n"+u.getEmailID();
+        return userRepository.findById(id).get();
+//        return u.getFirstName() + "\n" +u.getLastName()+"\n"+u.getMobileNumber()+"\n"+u.getEmailID();
     }
 
     public boolean checkForTheUser(long id)

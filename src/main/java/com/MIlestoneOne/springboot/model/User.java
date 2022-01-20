@@ -18,10 +18,9 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     @Column(name = "user_Name")
     private String userName;
-
+//date
     @Column(name = "first_Name")
     private String firstName;
 
