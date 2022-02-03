@@ -5,14 +5,10 @@ import com.MIlestoneOne.springboot.model.StatusUser;
 import com.MIlestoneOne.springboot.model.User;
 import com.MIlestoneOne.springboot.repository.ServiceLayer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.server.DelegatingServerHttpResponse;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController   //by this annotation we are declaring here that this class is a controller ,by using our class is capable of handling http request
 @RequestMapping("/user")

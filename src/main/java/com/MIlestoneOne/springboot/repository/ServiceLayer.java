@@ -61,6 +61,7 @@ public class ServiceLayer {
         updateuser.setEmailID(userdetails.getEmailID());
         updateuser.setAddress1(userdetails.getAddress1());
         updateuser.setAddress2(userdetails.getAddress2());
-        userRepository.save(updateuser);
+        userRepository.save(updateuser);//it has no use when we do update test because it is nullable and also it didn't returning anything.
+        System.out.println("updating user completed");
     }
 }

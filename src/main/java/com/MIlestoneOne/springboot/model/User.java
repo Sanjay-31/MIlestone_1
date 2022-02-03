@@ -39,8 +39,19 @@ public class User {
     @Column(name = "address_2")
     private String address2;
 
-    public void setUserName(String user) {
-        userName=user;
+    public User(long id,String userName,String firstName,String lastName,String emailID,int mobileNumber,String address1,String address2)
+    {
+        this.id=id;
+        this.userName=userName;
+        this.firstName=firstName;
+        this.lastName=lastName;
+        this.emailID=emailID;
+        this.mobileNumber=mobileNumber;
+        this.address1=address1;
+        this.address2=address2;
+    }
+    public void setUserName(String userName) {
+       this.userName=userName;
     }
     public void setFirstName(String first) {
         firstName=first;
