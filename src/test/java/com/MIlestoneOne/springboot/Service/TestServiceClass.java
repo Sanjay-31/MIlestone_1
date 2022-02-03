@@ -5,6 +5,7 @@ import com.MIlestoneOne.springboot.repository.ServiceLayer;
 import com.MIlestoneOne.springboot.repository.UserRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -85,5 +86,11 @@ public class TestServiceClass {
 //       when(userRepository.save(user1)).thenReturn(user1);
        serviceLayer.UpdateUser(5L,newUser);
        assert(user1.getUserName()).equals("Mukesh345");
+    }
+    @Test
+    void CheckForExistingUserTest()
+    {
+        when(userRepository.findAll()).thenReturn(listOfUser);
+        assertTrue(serviceLayer.checkforExistingUser(user1),"Checking whether a user exist of not");
     }
 }
