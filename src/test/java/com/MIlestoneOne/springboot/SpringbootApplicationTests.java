@@ -28,19 +28,19 @@ class SpringbootApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-	@Test
-	void TestService()
-	{
-		when(repository.findById(50L)).thenReturn(java.util.Optional.of(new User(50, "NewCaptain America", "NewChirs",
-				"NewEvans", "newChirs@gmail.com", 8999, "Upstate", "NewYork")));
-
-//		User expected=new User(50,"NewCaptain America","NewChirs",
-//				"NewEvans","newChirs@gmail.com",8999,"Upstate","NewYork");
-//		User current=serviceLayer.getById(50);
-//       assert(current.getAddress1()).equals("Upstate");
-//		assert(current.getUserName()).equals("NewCaptain America");
-//		assert(current.getFirstName()).equals("NewChirs");
-//		assert(current.getLastName()).equals("NewEvans");
-//		assertEquals(current.getMobileNumber(),8999);
-	}
+//	@Test
+//	void TestService()
+//	{
+//		when(repository.findById(50L)).thenReturn(java.util.Optional.of(new User(50, "NewCaptain America", "NewChirs",
+//				"NewEvans", "newChirs@gmail.com", 8999, "Upstate", "NewYork")));
+//
+////		User expected=new User(50,"NewCaptain America","NewChirs",
+////				"NewEvans","newChirs@gmail.com",8999,"Upstate","NewYork");
+////		User current=serviceLayer.getById(50);
+////       assert(current.getAddress1()).equals("Upstate");
+////		assert(current.getUserName()).equals("NewCaptain America");
+////		assert(current.getFirstName()).equals("NewChirs");
+////		assert(current.getLastName()).equals("NewEvans");
+////		assertEquals(current.getMobileNumber(),8999);
+//	}
 }

@@ -1,10 +1,12 @@
 package com.MIlestoneOne.springboot.controller;
 
+import com.MIlestoneOne.springboot.model.GetResponse;
 import com.MIlestoneOne.springboot.model.ResponseClass;
 import com.MIlestoneOne.springboot.model.StatusUser;
 import com.MIlestoneOne.springboot.model.User;
 import com.MIlestoneOne.springboot.repository.ServiceLayer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +14,6 @@ import java.util.List;
 
 @RestController   //by this annotation we are declaring here that this class is a controller ,by using our class is capable of handling http request
 @RequestMapping("/user")
-
 // all the rest api operation we do , we define in this class.
 public class UserController {
 
@@ -30,18 +31,18 @@ public class UserController {
 
     //GET method for a specific ID or Read Method
     @GetMapping("{id}")
-    public ResponseEntity<Object> getUserById(@PathVariable long id)
+    public ResponseEntity<?> getUserById(@PathVariable long id)
     {
-              if(serviceLayer.checkForTheUser(id))
-              {
-                  User u= serviceLayer.getById(id);
-                  ResponseClass r=new ResponseClass(u);
-                  return statusUser.GetStatusResponse("Retrieving Data Successfull",r);
-              }
-              else
-              {
-                  return statusUser.GetStatusResponse("User Not Exists",null);
-              }
+        if(serviceLayer.checkForTheUser(id))
+        {
+            User u= serviceLayer.getById(id);
+            ResponseClass r=new ResponseClass(u);
+            return statusUser.GetStatusResponse("Retrieving Data Successfull",r);
+        }
+        else
+        {
+            return statusUser.GetStatusResponse("User Not Exists",null);
+        }
     }
     //POST method or Create Method
     @PostMapping
@@ -77,16 +78,16 @@ public class UserController {
 
     //Delete Method for a specific id
     @DeleteMapping("{id}")
-    public String deleteEmployee(@PathVariable long id)
+    public ResponseEntity<?> deleteEmployee(@PathVariable long id)
     {
         if(serviceLayer.checkForTheUser(id))
         {
             serviceLayer.deleteUser(id);
-            return "User Deleted";
+            return  new ResponseEntity<>("User Deleted",HttpStatus.OK);
         }
         else
         {
-            return "User not exist";
+            return  new ResponseEntity<>("User Not Exist",HttpStatus.NOT_FOUND);
         }
     }
 }

@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class StatusUser {
 
-     public  ResponseEntity<Object> GetStatusResponse(String message, ResponseClass newUser)
+     public ResponseEntity<Object>  GetStatusResponse(String message, ResponseClass newUser)
     {
         Map<String,Object>map= new HashMap<String,Object>();
         map.put("status",message);
@@ -22,6 +22,6 @@ public class StatusUser {
         Map<String,Object>map= new HashMap<String,Object>();
         map.put("status",message);
         map.put("Data",newUser);
-        return  new  ResponseEntity<Object>(map,HttpStatus.OK);
+        return  new  ResponseEntity<Object>(map,HttpStatus.CREATED);
     }
 }

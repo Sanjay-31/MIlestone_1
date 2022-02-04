@@ -13,9 +13,9 @@ public class SpringbootApplication implements CommandLineRunner {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringbootApplication.class, args);
 	}
-
-	@Autowired
-	private UserRepository userRepository;
+//
+//	@Autowired
+//	private UserRepository userRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
