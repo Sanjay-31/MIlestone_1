@@ -6,7 +6,8 @@ import com.MIlestoneOne.springboot.Strategy.UserStrategy;
 import com.MIlestoneOne.springboot.model.StatusUser;
 import com.MIlestoneOne.springboot.model.User;
 import com.MIlestoneOne.springboot.Service.ServiceLayer;
-import jdk.jshell.spi.ExecutionControl;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ import java.util.Map;
 // all the rest api operation we do , we define in this class.
 public class UserController {
 
+    Logger logger= LogManager.getLogger(UserController.class);
     @Autowired
     private ServiceLayer serviceLayer;
     private UserStrategy userStrategy=new UserStrategy();
@@ -31,12 +33,14 @@ public class UserController {
     @GetMapping
     public ResponseEntity<List<User>> getALlUser()
     {
+        logger.debug("Accessing getAllUser() method");
         return new ResponseEntity<>(serviceLayer.findAllUsers(),HttpStatus.FOUND);
     }
     //GET method for a specific ID or Read Method
     @GetMapping("{id}")
     public ResponseEntity<?> getUserById(@PathVariable long id)
     {
+
         Map<Boolean, GetResponseInterface>mapInterface =new HashMap<>();
         mapInterface.put(true,new Get_DataRetrieved());
         mapInterface.put(false,new Get_UserNotExist());
@@ -48,7 +52,6 @@ public class UserController {
           return userStrategy.get(
                   mapInterface.get(exist),map.get(exist)
           );
-
 //        if(serviceLayer.checkForTheUser(id))
 //        {
 //            User u= serviceLayer.getById(id);
@@ -66,6 +69,7 @@ public class UserController {
     {
         if(serviceLayer.checkforExistingUser(newUser))
         {
+            logger.error("User Not exist");
             return statusUser.PostStatusResponse("A User Already exist with same credentials", newUser);
         }
         else
@@ -86,6 +90,7 @@ public class UserController {
         }
         else
         {
+            logger.error("User Not exist with id : "+id);
             return "User not exist";
         }
     }
@@ -101,6 +106,7 @@ public class UserController {
         }
         else
         {
+            logger.error("User Not exist with id : "+id);
             return  new ResponseEntity<>("User Not Exist",HttpStatus.NOT_FOUND);
         }
     }

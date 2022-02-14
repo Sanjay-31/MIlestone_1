@@ -21,16 +21,9 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-//import static sun.awt.util.PerformanceLogger.times;
 
-//@AutoConfigureMockMvc
-//@SpringBootTest
-////@ExtendWith(MockitoExtension.class)
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@AutoConfigureMockMvc
-//@SpringBootTest
+
 @ExtendWith(MockitoExtension.class)
 public class TestControllerClass {
 
@@ -64,10 +57,9 @@ public class TestControllerClass {
                 MockMvcRequestBuilders.get("/user/5").
                         contentType(MediaType.APPLICATION_JSON)//specifying the type of content;
                         .content(asJsonString(user1))//giving the content;
-//        ).andExpect(status().isOk()).andReturn();
+        ).andExpect(status().isFound()
         ).andReturn();
         int status = mvcResult.getResponse().getStatus();
-//        assertEquals(200, status);
         String content = mvcResult.getResponse().getContentAsString();
         verify(serviceLayer).getById(5);
         System.out.println("get by id verified");
@@ -88,7 +80,6 @@ public class TestControllerClass {
     void deleteEmployeeTest() throws Exception
     {
         when(serviceLayer.checkForTheUser(6)).thenReturn(true);
-//        when()
        MvcResult mvcResult= mockMvc.perform(
                 MockMvcRequestBuilders.delete("/user/6")
                 .contentType(MediaType.APPLICATION_JSON)

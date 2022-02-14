@@ -8,8 +8,7 @@ public class GetResponse {
         this.Data = data;
         this.status = message;
     }
-    public GetResponse()
-    {
+    public GetResponse() {
 
     }
 

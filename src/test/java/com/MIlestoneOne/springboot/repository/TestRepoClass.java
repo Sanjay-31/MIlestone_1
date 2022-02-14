@@ -37,7 +37,6 @@ public class TestRepoClass {
     {
 
         User actualUser =userRepository.getByUserName("Shyam123");
-        userName="Shyam123";
         boolean actual=userRepository.existsById(actualUser.getId());
          assertThat(actual).isTrue();
     }

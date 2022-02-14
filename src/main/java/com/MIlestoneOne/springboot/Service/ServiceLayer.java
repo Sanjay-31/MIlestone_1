@@ -2,15 +2,17 @@ package com.MIlestoneOne.springboot.Service;
 
 import com.MIlestoneOne.springboot.model.User;
 import com.MIlestoneOne.springboot.repository.UserRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ServiceLayer {
 
+    Logger logger=LogManager.getLogger(ServiceLayer.class);
     @Autowired
     private UserRepository userRepository;
 
@@ -60,6 +62,6 @@ public class ServiceLayer {
         updateuser.setAddress1(userdetails.getAddress1());
         updateuser.setAddress2(userdetails.getAddress2());
         userRepository.save(updateuser);//it has no use when we do update test because it is nullable and also it didn't returning anything.
-        System.out.println("updating user completed");
+        logger.info("updating user completed");
     }
 }
