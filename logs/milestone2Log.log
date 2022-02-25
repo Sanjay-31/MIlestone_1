@@ -1,0 +1,7 @@
+[INFO ] 2022-02-25 17:33:03.111 [restartedMain] SpringbootApplication - Starting SpringbootApplication using Java 17.0.2 on PPBNOMBPBT-238.local with PID 66000 (/Users/sanjay.shakya/Downloads/MIlestone_1-Test/target/classes started by sanjay.shakya in /Users/sanjay.shakya/Downloads/MIlestone_1-Test)
+[DEBUG] 2022-02-25 17:33:03.120 [restartedMain] SpringbootApplication - Running with Spring Boot v2.6.2, Spring v5.3.14
+[INFO ] 2022-02-25 17:33:03.121 [restartedMain] SpringbootApplication - No active profile set, falling back to default profiles: default
+[INFO ] 2022-02-25 17:33:08.012 [restartedMain] SpringbootApplication - Started SpringbootApplication in 5.753 seconds (JVM running for 7.477)
+[INFO ] 2022-02-25 17:34:15.289 [http-nio-9092-exec-1] UserController - List of user : 2
+[INFO ] 2022-02-25 17:34:33.927 [http-nio-9092-exec-2] UserController - {"email":"Sanjay@gmail.com","first":"Sanjay","last":"Shakya","mobileNo":9999}
+[ERROR] 2022-02-25 17:45:37.034 [http-nio-9092-exec-5] UserController - No User exists with id : 22
